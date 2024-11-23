@@ -8,6 +8,8 @@ def main():
         command = input('Введите номер команды: ')
         if command == '1':
             library.new_book()
+        elif command == '2':
+            library.view_all_books()
         elif command == '0':
             return
         else:

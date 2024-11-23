@@ -2,12 +2,15 @@ from datetime import datetime
 
 
 class Book:
-    def __init__(self, title:str, author:str, year:str):
-        self.book_id = 0
+    def __init__(self, title:str, author:str, year:str, book_id=0, status="в наличии"):
+        self.book_id = book_id
         self.title = title.title()
         self.author = author.title()
         self.year = year
-        self.status = "в наличии"
+        self.status = status
+
+    def __str__(self):
+        return f"{self.book_id}: {self.author} - {self.title}. {self.year} ({self.status})"
 
     def books_list(self):
         pass

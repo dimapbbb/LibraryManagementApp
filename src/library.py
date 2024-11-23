@@ -10,7 +10,6 @@ class Library(JsonWorkerMixin):
         title = input('Название: ')
         author = input('Автор: ')
         year = input('Год издания: ')
-
         new_book = Book.create(
             title=title,
             author=author,
@@ -44,10 +43,17 @@ class Library(JsonWorkerMixin):
         else:
             return new_id
 
+    def view_all_books(self):
+        library = self.read_file()
+        for book_info in library:
+            book = Book(**book_info)
+            print(book)
+
     @property
     def commands(self):
         """ Commands list """
         commands_list = (f"1  -->  Добавить книгу в библиотеку\n"
+                         f"2  -->  Просмотр списка всех книг\n"
                          f"0  -->  Завершить работу")
 
         return commands_list
