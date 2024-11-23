@@ -1,0 +1,6 @@
+def start_work():
+    pass
+
+
+if __name__ == "__main__":
+    start_work()
