@@ -6,14 +6,14 @@ class Library(JsonWorkerMixin):
     Класс для работы с библиотекой
     """
 
-    def add_book(self, title, author, year):
+    def add_book(self, title:str, author:str, year:str):
         """ Добавление книги в библиотеку """
         library = self.read_file()
         new_book = {
             "book_id": self.get_unique_id(library),
-            "title": title,
-            "author": author,
-            "year": year,
+            "title": title.strip(),
+            "author": author.strip(),
+            "year": year.strip(),
             "status": "в наличии"
         }
         library.append(new_book)
@@ -78,7 +78,7 @@ class Library(JsonWorkerMixin):
 
     @staticmethod
     def get_unique_id(library:list):
-        """ Получение уникального id при создании книги """
+        """ Получение уникального id при добавлении книги """
         new_id = 1
         if library:
             ids_list = [book['book_id'] for book in library]
@@ -94,12 +94,18 @@ class Library(JsonWorkerMixin):
     @staticmethod
     def get_word_list(book:dict):
         """ Слова из названия, автора и года издания возвращаются в одном списке """
-        string = " ".join([book['title'], book['author'], book['year']])   # Все в одну строку
+        # Все в одну строку
+        string = " ".join([book['title'], book['author'], book['year']])
         clear_string = ""
-        for letter in string:                                              # Все что не буква или цифра заменить на пробел
+
+        # Все что не буква или цифра заменить на пробел
+        for letter in string:
             if letter.isdigit() or letter.isalpha():
                 clear_string += letter
             else:
                 clear_string += " "
-        word_list = list(map(lambda x: x.lower(), clear_string.split()))    # Собрать в список и сделать все буквы маленькими
+
+        # Собрать в список и сделать все буквы маленькими
+        word_list = list(map(lambda x: x.lower(), clear_string.split()))
+
         return word_list

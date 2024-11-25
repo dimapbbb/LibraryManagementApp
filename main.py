@@ -1,4 +1,5 @@
 from src.library import Library
+from src.utils import print_
 from src.validators import validate_book_id, validate_year
 
 
@@ -15,11 +16,12 @@ def main():
             year = input('Год издания: ')
             if validate_year(year):
                 new_book = library.add_book(title, author, year)
-                print(new_book, "Успешно добавлено")
+                print_(new_book)
+                print("Успешно добавлено")
 
         elif command == '2':
             for book in library.view_all_books():
-                print(book)
+                print_(book)
 
         elif command == '3':
             book_id = input("Введите id книги: ")
@@ -40,7 +42,7 @@ def main():
             result = library.search_book(keywords)
             if result:
                 for book in result:
-                    print(book)
+                    print_(book)
             else:
                 print("Нет результатов")
 
